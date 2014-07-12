@@ -1,0 +1,24 @@
+﻿<Window x:Class="Camera.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WPF45"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        DataContext="{Binding Source={StaticResource Locator}, Path=Main}"
+        Title="MainWindow" Height="495" Width="353"
+        StateChanged="Window_StateChanged">
+    <Grid>
+        <Image HorizontalAlignment="Stretch" Name="videoSource" Source="{Binding CameraFrame}" VerticalAlignment="Stretch" Stretch="Fill">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDown">
+                    <cmd:EventToCommand Command="{Binding LeftButtonEvent}" PassEventArgsToCommand="True"></cmd:EventToCommand>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseMove">
+                    <cmd:EventToCommand Command="{Binding DraggingEvent}" PassEventArgsToCommand="True"></cmd:EventToCommand>
+                </i:EventTrigger>
+                <i:EventTrigger EventName="MouseUp">
+                    <cmd:EventToCommand Command="{Binding DropEvent}" PassEventArgsToCommand="True"></cmd:EventToCommand>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </Image>
+    </Grid>
+</Window>
